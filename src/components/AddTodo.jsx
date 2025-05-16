@@ -1,21 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./AddTodo.module.css"
 
-const AddTodo = () => {
+const AddTodo = ({ onNewItem }) => {
+
+  const [todoName, setTodoName] = useState("");
+  const [dueDate, setDueDate] = useState("");
+
+  const handleNameChange = (event) => {
+    setTodoName(event.target.value);
+  }
+
+  const handleDueDate = (event) => {
+    setDueDate(event.target.value);
+  }
+
+  const handleAddButtonClicked = (e) => {
+    e.preventDefault();
+    onNewItem(todoName, dueDate);
+    setTodoName("");
+    setDueDate("");
+  }
+
+
   return (
     <div>
       <div className="container ">
-        <div className='row kg-row'>
+        <form className='row kg-row' onSubmit={handleAddButtonClicked}>
           <div className='col-6'>
-            <input type="text" className={styles.inputField} placeholder='Enter Todo Here' />
+            <input type="text" className={styles.inputField} value={todoName} placeholder='Enter Todo Here' onChange={handleNameChange} />
           </div>
           <div className='col-4'>
-            <input type="date" />
+            <input type="date" value={dueDate} onChange={handleDueDate} />
           </div>
           <div className='col-2'>
-            <button type='button' className='btn btn-success kg-button'>Add</button>
+            <button type='submit' className='btn btn-success kg-button' >Add</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
