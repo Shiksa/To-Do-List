@@ -11,9 +11,13 @@ const App = () => {
   const [todoItems, setTodoItems] = useState([]);
 
   const handleNewItem = (itemName, itemDueDate) => {
-    // console.log(`New Item Added, Name: ${itemName} Due on: ${itemDueDate}`);
-    const newTodoItem = [...todoItems, { name: itemName, dueDate: itemDueDate }]
-    setTodoItems(newTodoItem);
+
+    //// Spread Operator
+    // const newTodoItem = [...todoItems, { name: itemName, dueDate: itemDueDate }]
+    // setTodoItems(newTodoItem);
+
+    //Functional Updates
+    setTodoItems((currValue) => [...currValue, { name: itemName, dueDate: itemDueDate }]);
   }
 
   const handleDeleteItem = (todoItemName) => {
